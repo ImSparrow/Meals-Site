@@ -1,0 +1,9 @@
+.notFound{
+  margin-top:5rem;
+}
+@media (min-width: 30rem) {
+  .result {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
