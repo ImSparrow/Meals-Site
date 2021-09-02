@@ -6,6 +6,7 @@ const FoodContext = React.createContext({
   removeFavorite: () => {},
   addResult: (results) => {},
   clearResult: () => {},
+  addAllFavorite: () => {},
 });
 
 // const foodReducer = (state,action)=>{
@@ -33,6 +34,9 @@ export const FoodContextProvider = (props) => {
   const clearResult = () => {
     setResultsState([]);
   };
+  const addAllFavorite = (allFavorites) => {
+    setFavorite((prev) => allFavorites);
+  };
 
   const foodContext = {
     favorite: favorite,
@@ -41,6 +45,7 @@ export const FoodContextProvider = (props) => {
     removeFavorite,
     addResult,
     clearResult,
+    addAllFavorite,
   };
   return (
     <FoodContext.Provider value={foodContext}>

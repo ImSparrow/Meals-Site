@@ -1,10 +1,15 @@
 import Image from "next/image";
 import classes from "./Favorite.module.css";
 import FavoriteItemInfo from "./FavoriteItemInfo";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import FoodContext from "../../store/api";
 const FavoriteItem = (props) => {
   const [showInfo, setShowInfo] = useState(false);
+  const foodCtx = useContext(FoodContext);
   const meal = props.item;
+  useEffect(() => {
+    localStorage.setItem("FavoriteRecipes", JSON.stringify(foodCtx.favorite));
+  }, [foodCtx.favorite]);
   return (
     <>
       {showInfo && (
@@ -13,10 +18,17 @@ const FavoriteItem = (props) => {
           info={meal.strInstructions}
           image={meal.strMealThumb}
           meal={meal}
-          onClose={()=>{setShowInfo(false)}}
+          onClose={() => {
+            setShowInfo(false);
+          }}
         ></FavoriteItemInfo>
       )}
-      <div className={classes["food--image__container"]} onClick={()=>{setShowInfo(true)}}>
+      <div
+        className={classes["food--image__container"]}
+        onClick={() => {
+          setShowInfo(true);
+        }}
+      >
         <div>
           <Image
             className={classes["food--image"]}

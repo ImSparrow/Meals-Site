@@ -12,14 +12,17 @@ const FavoriteItemInfo = (props) => {
     } else {
       setCanAdd(true);
     }
+    
+    localStorage.setItem("FavoriteRecipes", JSON.stringify(foodCtx.favorite));
   }, [foodCtx.favorite]);
 
-  const addHandler = () => {
+  const addHandler = async () => {
     foodCtx.addFavorite(props.meal);
   };
   const removeHandler = () => {
     foodCtx.removeFavorite(props.meal);
   };
+
   return ReactDOM.createPortal(
     <div className={classes["showinfo"]}>
       <div className={classes["showinfo--container"]}>

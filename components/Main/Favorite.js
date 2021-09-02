@@ -1,9 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FoodContext from "../../store/api";
 import FavoriteItem from "./FavoriteItem";
 import classes from "./Favorite.module.css";
 const Favorite = () => {
   const foodCtx = useContext(FoodContext);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("FavoriteRecipes"));
+
+    if (favorites !== null) {
+      foodCtx.addAllFavorite(favorites);
+    }
+    
+  }, []);
 
   if (foodCtx.favorite.length !== 0) {
     return (
